@@ -13,6 +13,8 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-pbr
 
+Requires:	python-six
+Requires:	python-webob
 
 %description
 OSProfiler is an OpenStack cross-project profiling library.
@@ -34,5 +36,8 @@ OSProfiler is an OpenStack cross-project profiling library.
 %{_bindir}/osprofiler
 
 %changelog
+* Mon Aug 25 2014 Derek Higgins <derekh@redhat.com> - XXX
+- Added dependencies on python-six and python-webob
+
 * Fri Aug 15 2014 Derek Higgins <derekh@redhat.com> - XXX
 - Initial package.
