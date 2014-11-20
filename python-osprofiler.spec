@@ -1,43 +1,64 @@
+# Created by pyp2rpm-1.1.0b
 %global pypi_name osprofiler
 
-Name:           python-osprofiler
+Name:           python-%{pypi_name}
 Version:        XXX
-Release:        1%{?dist}
-Summary:        OpenStack cross-project profiling library
+Release:        XXX{?dist}
+Summary:        OpenStack Profiler Library
 
 License:        ASL 2.0
-URL:            https://launchpad.net/osprofiler
+URL:            http://www.openstack.org/
 Source0:        https://pypi.python.org/packages/source/o/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python2-devel
+BuildRequires:  python-setuptools
 BuildRequires:  python-pbr
 
-Requires:	python-six
-Requires:	python-webob
+Requires: python-six
+Requires: python-webob
 
 %description
 OSProfiler is an OpenStack cross-project profiling library.
 
+
+%package doc
+Summary:    Documentation for the OpenStack Profiler Library
+Group:      Documentation
+
+BuildRequires:  python-sphinx
+
+%description doc
+Documentation for the OpenStack Profiler Library
+
+
 %prep
-%setup -q -n osprofiler-%{upstream_version}
+%setup -q -n %{pypi_name}-%{upstream_version}
+# Let RPM handle the dependencies
+rm -f requirements.txt
+# Remove bundled egg-info
+rm -rf %{pypi_name}.egg-info
 
 %build
-%{__python} setup.py build
+%{__python2} setup.py build
+
+# generate html docs
+sphinx-build doc/source html
+# remove the sphinx-build leftovers
+rm -rf html/.{doctrees,buildinfo}
 
 %install
-%{__python} setup.py install --skip-build --root %{buildroot}
+%{__python2} setup.py install --skip-build --root %{buildroot}
 
 %files
 %doc README.rst LICENSE
-%dir %{python_sitelib}/osprofiler
-%{python_sitelib}/osprofiler
-%{python_sitelib}/osprofiler-%{version}*
 %{_bindir}/osprofiler
+%{python2_sitelib}/%{pypi_name}
+%{python2_sitelib}/%{pypi_name}-*.egg-info
+
+%files doc
+%doc LICENSE html
 
 %changelog
-* Mon Aug 25 2014 Derek Higgins <derekh@redhat.com> - XXX
-- Added dependencies on python-six and python-webob
-
-* Fri Aug 15 2014 Derek Higgins <derekh@redhat.com> - XXX
+* Mon Aug 25 2014 Alan Pevec <apevec@redhat.com> - 0.3.0-1
 - Initial package.
