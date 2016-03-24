@@ -1,14 +1,16 @@
 # Created by pyp2rpm-1.1.0b
 %global pypi_name osprofiler
 
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+
 Name:           python-%{pypi_name}
-Version:        XXX
-Release:        XXX
+Version:        1.2.0
+Release:        1%{?dist}
 Summary:        OpenStack Profiler Library
 
 License:        ASL 2.0
 URL:            http://www.openstack.org/
-Source0:        https://pypi.python.org/packages/source/o/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/o/%{pypi_name}/%{pypi_name}-%{version}%{?milestone}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python2-devel
@@ -60,5 +62,5 @@ rm -rf html/.{doctrees,buildinfo}
 %doc LICENSE html
 
 %changelog
-* Mon Aug 25 2014 Alan Pevec <apevec@redhat.com> - 0.3.0-1
-- Initial package.
+* Thu Mar 24 2016 RDO <rdo-list@redhat.com> 1.2.0-1
+- RC1 Rebuild for Mitaka 
