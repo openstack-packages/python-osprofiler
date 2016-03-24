@@ -60,5 +60,3 @@ rm -rf html/.{doctrees,buildinfo}
 %doc LICENSE html
 
 %changelog
-* Mon Aug 25 2014 Alan Pevec <apevec@redhat.com> - 0.3.0-1
-- Initial package.
