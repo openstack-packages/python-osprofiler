@@ -28,6 +28,7 @@ Group:      Documentation
 
 BuildRequires:  python-sphinx
 BuildRequires:  python-oslo-sphinx
+BuildRequires:  git
 
 %description doc
 Documentation for the OpenStack Profiler Library
